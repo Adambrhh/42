@@ -12,39 +12,51 @@
 
 #include "../includes/push_swap.h"
 
-t_stack	fill_stack_a(char *str)
+t_stack	*init_stack(int capacity)
 {
-	t_stack stack_a;
-	char	**args;
-	int		i;
+	t_stack	*stack;
 
-	stack_a.array = NULL;
-	stack_a.size = 0;
-	args = ft_split(str, ' ');
-	i = 0;
-	while (args[stack_a.size])
-		stack_a.size++;
-	stack_a.array = malloc(sizeof(int) * stack_a.size);
-	if (!stack_a.array)
+	stack = malloc(sizeof(t_stack));
+	if (!stack)
+		return (NULL);
+	stack->a = malloc(sizeof(int) * capacity);
+	stack->b = malloc(sizeof(int) * capacity);
+	if (!stack->a || !stack->b)
 	{
-		while (stack_a.size > 0)
-			free(args[--(stack_a.size)]);
-		return (free(args), stack_a);
+		free(stack->a);
+		free(stack->b);
+		free(stack);
+		return (NULL);
 	}
-	while (i < stack_a.size)
-	{
-		stack_a.array[i] = ft_atoi(args[i]);
-		free(args[i]);
-		i++;
-	}
-	return(free(args), stack_a);
+	stack->size_a = 0;
+	stack->size_b = 0;
+	stack->capacity = capacity;
+	return (stack);
 }
 
-t_stack	make_stack_b(t_stack stack_a)
+int	fill_stack(t_stack *stack, char *str)
 {
-	t_stack	stack_b;
+	char	**numbers;
+	int		num;
+	int		i;
 
-	stack_b.array = NULL;
-	stack_b.size = stack_a.size;
-	stack_b.array = ft_calloc(stack_a.size, 4);
+	i = 0;
+	numbers = ft_split(str, ' ');
+	if (!numbers)
+		return (0);
+	while (numbers[i])
+	{
+		num = ft_atoi(numbers[i]);
+		if (num < INT_MIN || num > INT_MAX || dup(stack->a, stack->size_a, num))
+		{
+			ft_printf("Error\n");
+			free_split(numbers);
+			return (0);
+		}
+		stack->a[stack->size_a] = (int)num;
+		stack->size_a++;
+		i++;
+	}
+	free_split(numbers);
+	return (1);
 }

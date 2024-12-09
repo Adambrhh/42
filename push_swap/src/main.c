@@ -12,29 +12,27 @@
 
 #include "../includes/push_swap.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_stack stack;
-    int i;
+	int		i;
+	t_stack	*stack;
 
-    if (argc != 2)
-    {
-        printf("Usage: %s \"numbers separated by space\"\n", argv[0]);
-        return (1);
-    }
-
-    stack = fill_array(argv[1]);
-    if (!stack.array)
-    {
-        printf("Error: Failed to allocate memory.\n");
-        return (1);
-    }
-
-    printf("Stack size: %d\n", stack.size);
-    printf("Stack elements:\n");
-    for (i = 0; i < stack.size; i++)
-        printf("%d\n", stack.array[i]);
-
-    free(stack.array);
-    return (0);
+	i = 0;
+	if (argc != 2)
+		return (ft_printf("\n"), 1);
+	stack = init_stack(1000);
+	if (!stack)
+		return (ft_printf("\n"), 1);
+	if (!fill_stack(stack, argv[1]))
+		return (free_stack(stack), 1);
+	if (is_sorted(stack))
+		return (free_stack(stack), 0);
+	ft_printf("Stack A:\n");
+	while (i < stack->size_a)
+	{
+		ft_printf("%d\n", stack->a[i]);
+		i++;
+	}
+	free_stack(stack);
+	return (0);
 }

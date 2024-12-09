@@ -12,26 +12,45 @@
 
 #include "../includes/push_swap.h"
 
-static void	ft_rr(t_stack **stack)
+void	rra(t_stack *stack)
 {
-	
-}
+	int	temp;
+	int	i;
 
-void	rra(t_stack **stack_a)
-{
-	ft_rr(stack_a);
+	temp = stack->a[stack->size_a - 1];
+	i = stack->size_a - 1;
+	if (stack->size_a < 2)
+		return ;
+	while (i > 0)
+	{
+		stack->a[i] = stack->a[i - 1];
+		i--;
+	}
+	stack->a[0] = temp;
 	ft_printf("rra\n");
 }
 
-void	rrb(t_stack **stack_b)
+void	rrb(t_stack *stack)
 {
-	ft_rr(stack_b);
+	int	temp;
+	int	i;
+
+	temp = stack->b[stack->size_b - 1];
+	i = stack->size_b - 1;
+	if (stack->size_b < 2)
+		return ;
+	while (i > 0)
+	{
+		stack->b[i] = stack->b[i - 1];
+		i--;
+	}
+	stack->a[0] = temp;
 	ft_printf("rrb\n");
 }
 
-void	rrr(t_stack **stack_a, t_stack **stack_b)
+void	rrr(t_stack *stack)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	rra(stack);
+	rrb(stack);
 	ft_printf("rrr\n");
 }
