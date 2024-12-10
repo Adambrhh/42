@@ -6,11 +6,12 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:29:11 by abarahho          #+#    #+#             */
-/*   Updated: 2024/12/09 14:31:22 by abarahho         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:45:02 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include "../libft/libft.h"
 
 t_stack	*init_stack(int capacity)
 {
@@ -42,21 +43,36 @@ int	fill_stack(t_stack *stack, char *str)
 
 	i = 0;
 	numbers = ft_split(str, ' ');
+	
 	if (!numbers)
 		return (0);
 	while (numbers[i])
 	{
 		num = ft_atoi(numbers[i]);
-		if (num < INT_MIN || num > INT_MAX || dup(stack->a, stack->size_a, num))
+		if (num < INT_MIN || num > INT_MAX || idp(stack->a, stack->size_a, num))
 		{
 			ft_printf("Error\n");
 			free_split(numbers);
 			return (0);
 		}
-		stack->a[stack->size_a] = (int)num;
+		stack->a[stack->size_a] = num;
 		stack->size_a++;
 		i++;
 	}
 	free_split(numbers);
 	return (1);
+}
+
+void	push_swap(t_stack *stack)
+{
+	int	chunks;
+
+	if (is_sorted(stack))
+		return ;
+	if (stack->size_a <= 100)
+		chunks = 5;
+	else
+		chunks = 11;
+	push_chunks_to_b(stack, chunks);
+	sort_b_to_a(stack);
 }

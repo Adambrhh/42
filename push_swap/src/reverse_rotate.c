@@ -6,11 +6,12 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:51:33 by abarahho          #+#    #+#             */
-/*   Updated: 2024/12/09 14:43:46 by abarahho         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:44:50 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include "../libft/libft.h"
 
 void	rra(t_stack *stack)
 {

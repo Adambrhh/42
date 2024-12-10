@@ -6,11 +6,12 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:26:45 by abarahho          #+#    #+#             */
-/*   Updated: 2024/12/09 14:30:59 by abarahho         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:45:09 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include "../libft/libft.h"
 
 void	free_split(char **split)
 {
@@ -25,7 +26,7 @@ void	free_split(char **split)
 	free (split);
 }
 
-int	dup(int *arr, int size, int num)
+int	idp(int *arr, int size, int num)
 {
 	int	i;
 
